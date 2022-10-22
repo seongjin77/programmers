@@ -1,18 +1,27 @@
 function solution(array) {
 
-    let arr = new Map();
+    
+    let copy = [...array];
+    let result = {};
     
     for(let i of array){
-        arr.set( i , (arr.get(i) || 0) +1)
+        result[i] = 0;
     }
     
-    let result = [...arr].sort((a,b) => b[0] - a[0]);
-        result.sort((a,b) => b[1] - a[1]);
+    for(let i of array){
+        
+        if(copy.includes(i)){
+            copy.splice(copy.indexOf(i),1);
+            result[i]++
+        }
+    }
     
+    result = Object.entries(result);
+    //console.log(result)
+    result.sort((a,b) => b[1] - a[1])
+    console.log(result)
     
-    if( result.length === 1) return result[0][0]
-    else if( result[0][1] === result[1][1]) return -1
-    else return result[0][0]
+    return (result.length === 1 || result[0][1] > result[1][1]) ? parseInt(result[0][0]) : -1;
         
     
 }
