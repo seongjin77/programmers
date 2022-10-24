@@ -15,7 +15,7 @@
 // }
 
 function solution (id_pw, db) {
-    let result ='';
+    let result ='fail';
     db.map(data => {
         let checkedId = id_pw[0] === data[0]
         let checkedPw = id_pw[1] === data[1]
