@@ -1,18 +1,12 @@
 function solution(num_list) {
-   var answer = [];
-    let num1 = 0;
-    let num2 = 0;
-   
-    num_list.forEach(v => {
-        if(v % 2 === 0){
-            num1 += 1
-        }
-        else {
-             num2 += 1
-        }
-    })
+    let result = [0, 0];
+    num_list.forEach(function(item) {
+        if (item%2===0) {
+        result[0] = result[0] +1;
+    } else {
+        result[1] = result[1] +1;
+    }
     
-    answer.push(num1,num2);
-    
-    return answer;
+})
+    return result
 }
