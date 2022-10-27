@@ -1,19 +1,8 @@
 function solution(numbers, direction) {
-    var answer = [...numbers];
-    let len = answer.length;
-    
-    numbers.forEach((v,i) => {
-        if(direction === 'right'){
-            if(i === len-1) answer[0] = v;
-            else answer[i+1] = v;
-        }
-        else{
-            if(i === 0) answer[len-1] = v;
-            else answer[i-1] = v;
-        }
-    })
+    var answer = [];
+    let len = numbers.length;
     
     
+    return direction === 'right' ? [numbers[len-1], ...numbers.slice(0,len-1)] : [...numbers.slice(1),numbers[0]]
     
-    return answer;
 }
