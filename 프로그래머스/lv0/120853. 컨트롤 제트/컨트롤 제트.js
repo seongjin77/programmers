@@ -1,8 +1,12 @@
 function solution(s) {
-    s = s.split(" ")
-
-    while(s.includes('Z')) {
-        s.splice(s.indexOf('Z')-1,2)
-    }
-    return s.reduce((a,b) => a+Number(b), 0)
+   let answer = [];
+    
+    s.split(' ').map(v => {
+        if(v === 'Z') answer.pop();
+        else answer.push(parseInt(v))
+    })
+    
+    return answer.reduce((a,b) => a + b,0)
+    
+    
 }
