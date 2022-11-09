@@ -1,8 +1,13 @@
 function solution(chicken) {
-  const order = coupons => {
-    if (coupons < 10) return 0;
-    const service = Math.floor(coupons / 10);
-    return service + order(service + (coupons % 10));
-  };
-  return order(chicken);
+ var answer =0;
+ let rest =0;   
+    
+ while(chicken>1){
+     answer += Math.floor(chicken / 10) // 108 10 1
+     rest += chicken % 10 // 1 8 
+     chicken = chicken / 10
+ }   
+    
+    
+  return answer + Math.floor(rest / 10)
 }
