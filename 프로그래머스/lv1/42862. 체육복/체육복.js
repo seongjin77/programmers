@@ -1,27 +1,41 @@
 function solution(n, lost, reserve) {
+    let answer = 0;
+    let count = {};
+    let realLost = lost.filter(v => !reserve.includes(v)).sort()
     
-    // 학생들이 가지고 있는 체육복 수를 모두 1로 세팅
-    const clothes = Array(n).fill(1);
+    // 모든 학생들에게 체육복 제공
+    for(let i=1; i<=n; i++){
+        count[i] = 1
+    }
+    // 여벌 체육복 학생
+    reserve.forEach(i => {
+        count[i] += 1
+    })
+    // 잃어버린 체육복 학생
+    lost.forEach(i => {
+        count[i] += -1
+    })
     
-    // 체육복을 도난당한 학생들의 체육복 수를 0으로
-    lost.map((lost) => {clothes[lost-1] = 0});
-    
-    // 여벌을 가지고 있는 학생들의 체육복 수 1 증가
-    reserve.map(reserve => {clothes[reserve-1] += 1});
-
-    for(let i=0; i<n; i++){
-        // 체육복이 0개인 학생이 앞사람한테 받아왔을 때 
-        if(clothes[i] === 0 && clothes[i-1] ===2){
-            clothes[i] = 1;
-            clothes[i-1] = 1;
+    // 빌려주기
+    realLost.forEach(v => {
+        if(count[v-1] >= 2){
+            count[v-1] += -1
+            count[v] += 1
         }
-        // 체육복이 0개인 학생이 뒷사람한테 받아왔을 때 
-        else if(clothes[i] === 0 && clothes[i+1] === 2){
-            clothes[i] = 1;
-            clothes[i+1]=1;
+        else if(count[v+1] >=2){
+            count[v+1] += -1
+            count[v] += 1
+        }
+    })
+    
+    //수 구하기
+    for(let student in count){
+        if(count[student] >= 1){
+            answer += 1
         }
     }
     
-    // 체육복이 한개 이상인 학생들의 수
-    return clothes.filter(c => c > 0).length;
+
+    
+    return answer;
 }
